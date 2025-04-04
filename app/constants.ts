@@ -1,5 +1,11 @@
 import { SubscriptionPlan } from "./types/subscription";
 
+export const PLAN_DURATION = {
+  THREE_MONTH: "3-month",
+  SIX_MONTH: "6-month",
+  TWELVE_MONTH: "12-month",
+};
+
 export const subscriptionPlans: SubscriptionPlan[] = [
   {
     id: "3-month",

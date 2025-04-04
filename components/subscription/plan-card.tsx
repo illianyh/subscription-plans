@@ -2,6 +2,7 @@
 
 import { Check } from "lucide-react";
 import type { SubscriptionPlan } from "@/app/types/subscription";
+import { PLAN_DURATION } from "@/app/constants";
 
 interface PlanCardProps {
   plan: SubscriptionPlan;
@@ -24,11 +25,11 @@ export function PlanCard({
     }
 
     switch (plan.id) {
-      case "3-month":
+      case PLAN_DURATION.THREE_MONTH:
         return `Billed £${price * 3} every 3 months`;
-      case "6-month":
+      case PLAN_DURATION.SIX_MONTH:
         return `Billed £${price * 6} every 6 months`;
-      case "12-month":
+      case PLAN_DURATION.TWELVE_MONTH:
         return `Billed £${price * 12} annually`;
       default:
         return "";
@@ -36,9 +37,9 @@ export function PlanCard({
   };
 
   const getSavingsText = () => {
-    if (isAnnualBilling || plan.id === "3-month") return null;
+    if (isAnnualBilling || plan.id === PLAN_DURATION.THREE_MONTH) return null;
 
-    const savingsAmount = plan.id === "6-month" ? 60 : 180;
+    const savingsAmount = plan.id === PLAN_DURATION.SIX_MONTH ? 60 : 180;
     return (
       <div className="text-sm text-gray-600 mt-1">
         <span className="text-black font-medium">Save £{savingsAmount}</span>{" "}
