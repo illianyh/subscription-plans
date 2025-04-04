@@ -4,6 +4,14 @@
 
 This project implements an improved subscription plan selection UI focused on driving more customers toward longer-term plans.
 
+## Tech Stack
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Lucide
+- Jest + React Testing Library
+
 ## Implementation Approach
 
 I've created a clear visual hierarchy that guides users toward longer subscription plans. The 6-month plan is strategically positioned as "MOST POPULAR" to leverage social proof.
