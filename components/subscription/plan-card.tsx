@@ -2,8 +2,8 @@
 
 import { Check } from "lucide-react";
 import type { SubscriptionPlan } from "@/app/types/subscription";
-import { PLAN_DURATION } from "@/app/constants";
-
+import { ANNUAL_DISCOUNT, PLAN_DURATION } from "@/app/constants";
+import { PriceSavingsTooltip } from "./tooltip";
 interface PlanCardProps {
   plan: SubscriptionPlan;
   isSelected: boolean;
@@ -17,7 +17,10 @@ export function PlanCard({
   isAnnualBilling,
   onSelect,
 }: PlanCardProps) {
-  const price = isAnnualBilling ? Math.round(plan.price * 0.8) : plan.price;
+  const monthlyPrice = plan.price;
+  const price = isAnnualBilling
+    ? Math.round(monthlyPrice * ANNUAL_DISCOUNT)
+    : monthlyPrice;
 
   const getBillingText = () => {
     if (isAnnualBilling) {
@@ -72,6 +75,12 @@ export function PlanCard({
         <div className="flex items-baseline">
           <span className="text-3xl font-medium">£{price}</span>
           <span className="text-gray-600 ml-1">/mo</span>
+          <div className="ml-2">
+            <PriceSavingsTooltip
+              plan={plan}
+              isAnnualBilling={isAnnualBilling}
+            />
+          </div>
         </div>
 
         <div className="text-sm text-gray-600 mt-1">{getBillingText()}</div>

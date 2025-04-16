@@ -1,5 +1,7 @@
 import { SubscriptionPlan } from "./types/subscription";
 
+export const ANNUAL_DISCOUNT = 0.8;
+
 export const PLAN_DURATION = {
   THREE_MONTH: "3-month",
   SIX_MONTH: "6-month",

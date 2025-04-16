@@ -5,11 +5,21 @@ import { PlanCard } from "@/components/subscription/plan-card";
 import { BillingToggle } from "@/components/subscription/billing-toggle";
 import { StatsSection } from "@/components/subscription/stats-section";
 import { CheckoutButton } from "@/components/subscription/checkout-button";
-import { subscriptionPlans } from "./constants";
-
+import { PLAN_DURATION, subscriptionPlans } from "./constants";
+import { FAQSection } from "@/components/subscription/faq-section";
+import { PromoCode } from "@/components/subscription/promo-code";
+import { useSubscription } from "@/app/context/SubscriptionContext";
 export default function SubscriptionPlans() {
+  const [discountPercent, setDiscountPercent] = useState(0);
+
+  const handleApplyPromo = (discount: number) => {
+    setDiscountPercent(discount);
+  };
+
   const [isAnnualBilling, setIsAnnualBilling] = useState<boolean>(false);
-  const [selectedPlanId, setSelectedPlanId] = useState<string>("6-month");
+  const [selectedPlanId, setSelectedPlanId] = useState<string>(
+    PLAN_DURATION.SIX_MONTH
+  );
 
   const handlePlanSelection = (planId: string) => {
     setSelectedPlanId(planId);
@@ -49,8 +59,14 @@ export default function SubscriptionPlans() {
         ))}
       </div>
 
-      <CheckoutButton selectedPlanId={selectedPlanId} />
+      <PromoCode onApply={handleApplyPromo} />
+      <CheckoutButton
+        selectedPlanId={selectedPlanId}
+        discountPercent={discountPercent}
+        isAnnualBilling={isAnnualBilling}
+      />
       <StatsSection />
+      <FAQSection />
     </div>
   );
 }
